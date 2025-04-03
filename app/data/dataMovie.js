@@ -15,7 +15,7 @@ let Datamovies = {};
      * Elle prend en paramètre une semaine (1, 2, ..., 52) et un jour (lundi mardi...)
      * renvoie les données contenues dans la réponse du serveur (data).
      */
-Datamovies.requestMovies = async function(week, day){
+DataMovies.requestMovies = async function(week, day){
     // fetch permet d'envoyer une requête HTTP à l'URL spécifiée. 
     // L'URL est construite en concaténant HOST_URL à "/server/script.php?direction=" et la valeur de la variable dir. 
     // L'URL finale dépend de la valeur de HOST_URL et de dir.
