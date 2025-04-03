@@ -1,0 +1,18 @@
+body{
+  background-color: rgb(66, 63, 66);
+}
+.combo__card{
+  display: flex;
+  flex-direction: column;
+  
+}
+.movie__card{
+  display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+gap: 5rem;
+}
+.movie__img{
+  max-width: 15rem;
+}

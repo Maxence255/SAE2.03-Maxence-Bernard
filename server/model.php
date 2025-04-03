@@ -21,19 +21,12 @@ define("DBPWD", "bernard196");
 function getAllMovies(){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD); 
     // Requête SQL de mise à jour du menu avec des paramètres
-    $sql = "REPLACE INTO Repas (semaine, jour, entree, plat, dessert) 
-            VALUES (:semaine, :jour, :entree, :plat, :dessert)";
+    $sql = "select id, name, image from Movie";
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
-    // Lie les paramètres aux valeurs
-    $stmt->bindParam(':entree', $e);
-    $stmt->bindParam(':plat', $p);
-    $stmt->bindParam(':dessert', $d);
-    $stmt->bindParam(':jour', $j);
-    $stmt->bindParam(':semaine', $w);
     // Exécute la requête SQL
     $stmt->execute();
     // Récupère le nombre de lignes affectées par la requête
-    $res = $stmt->rowCount(); 
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ); 
     return $res; // Retourne le nombre de lignes affectées
 }
