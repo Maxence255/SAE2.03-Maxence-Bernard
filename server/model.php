@@ -55,3 +55,24 @@ function updateMovie($n, $y, $l, $d, $dr, $c, $i, $t, $a){
     $res = $stmt->rowCount(); 
     return $res; // Retourne le nombre de lignes affectées
 }
+function getMovieById($id) {
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD); 
+    
+    // Requête SQL pour récupérer les informations d'un film spécifique
+    $sql = "SELECT * FROM Movie WHERE id = :id";
+    
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+    
+    // Lie le paramètre :id à la valeur de $id
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    
+    // Exécute la requête SQL
+    $stmt->execute();
+    
+    // Récupère le résultat sous forme d'objet
+    $res = $stmt->fetch(PDO::FETCH_OBJ);
+    
+    return $res; // Retourne les informations du film
+}

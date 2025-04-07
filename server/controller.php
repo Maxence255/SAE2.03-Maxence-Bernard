@@ -49,3 +49,22 @@ function updateMoviesController(){
       return false;
     }
   }
+
+  function readMovieByIdController() {
+    // Récupère l'ID du film depuis les paramètres de la requête
+    if (isset($_REQUEST['id'])) {
+        $id = $_REQUEST['id'];
+        
+        // Appelle la fonction getMovieById du modèle
+        $movie = getMovieById($id);
+        
+        // Vérifie si un film a été trouvé
+        if ($movie) {
+            return $movie; // Retourne les informations du film
+        } else {
+            return "Film non trouvé pour l'ID $id.";
+        }
+    } else {
+        return "ID de film manquant dans la requête.";
+    }
+}

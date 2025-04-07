@@ -12,12 +12,14 @@
 
     <section id="content"></section>
 
-    <section id="cards"></section>
+    <section id="details"></section>
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
 
       import { MovieCard } from "./component/Movie/script.js";
+      import { detailsMovie } from "./component/Details/script.js";
+
       import { DataMovies } from "./data/dataMovie.js";
 
       // Controleur
@@ -58,6 +60,10 @@
       V.renderMovie = function (data) {
         let content = document.querySelector("#content");
         content.innerHTML = MovieCard.format(data);
+      };
+      V.renderDetails = function (data) {
+        let content = document.querySelector("#details");
+        content.innerHTML = detailsMovie.format(data);
       };
 
       C.start(); // Démarre l'application
