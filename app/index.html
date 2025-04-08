@@ -1,77 +1,89 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title>SAE2.03 APP</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/base.css" />
-  </head>
 
-  <body>
-    <header id="header"></header>
+<head>
+  <title>SAE2.03 APP</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/base.css" />
+</head>
 
-    <section id="content"></section>
+<body>
+  <header id="header"></header>
 
-    <script type="module">
-      import { NavBar } from "./component/NavBar/script.js";
+  <section id="content"></section>
 
-      import { MovieCard } from "./component/Movie/script.js";
-      import { detailsMovie } from "./component/Details/script.js";
+  <script type="module">
+    import { NavBar } from "./component/NavBar/script.js";
 
-      import { DataMovies } from "./data/dataMovie.js";
 
-      // Controleur
-      // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
-      // Une fois l'application terminée, on pourrait remettre let C.
-      window.C = {};
+    import { MovieCard } from "./component/Movie/script.js";
+    import { detailsMovie } from "./component/Details/script.js";
 
-      C.handlerAbout = function () {
-        alert(
-          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
-        );
-      };
+    import { DataMovies } from "./data/dataMovie.js";
+    import { MovieCategory } from "./component/MovieCategory/script.js";
 
-      C.handlerDetail = async function (movieId) {
-        let movieData = await DataMovies.requestMovieDetails(movieId); 
-        V.renderDetails(movieData); 
+    // Controleur
+    // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
+    // Une fois l'application terminée, on pourrait remettre let C.
+    window.C = {};
+
+    C.handlerAbout = function () {
+      alert(
+        "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
+      );
+    };
+    C.getMovie = async function () {
+        let data = await DataMovie.requestMoviesCategory(); // On récupère les données par défaut et on attend avec await
         
-      };
-      C.getAllMovies = async function () {
-        let data = await DataMovies.requestMovies();
-        V.renderMovie(data);
-        
-      }
-      C.start = function () {
-        V.renderNavBar("C.handlerAbout()");
-        C.getAllMovies();
-        
+        V.renderMoviesCategory(data);
       };
 
-      // Vue (contient tout ce qui est relatif à l'affichage)
-      window.V = {};
+    C.handlerDetail = async function (movieId) {
+      let movieData = await DataMovies.requestMovieDetails(movieId);
+      V.renderDetails(movieData);
 
-      /**
-       * V.renderNavBar
-       *
-       * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
-       * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
-       * formaté par le composant NavBar.
-       */
-      V.renderNavBar = function (hAbout) {
-        let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout);
-      };
-      V.renderMovie = function (data) {
-    let content = document.querySelector("#content");
-    content.innerHTML = MovieCard.format(data);
-};
-      V.renderDetails = function (data) {
+    };
+    C.getAllMovies = async function () {
+      let data = await DataMovies.requestMovies();
+      V.renderMovie(data);
+
+    }
+    C.start = function () {
+      V.renderNavBar("C.handlerAbout()");
+      C.getAllMovies();
+
+    };
+
+    // Vue (contient tout ce qui est relatif à l'affichage)
+    window.V = {};
+
+    /**
+     * V.renderNavBar
+     *
+     * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
+     * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
+     * formaté par le composant NavBar.
+     */
+    V.renderNavBar = function (hAbout) {
+      let header = document.querySelector("#header");
+      header.innerHTML = NavBar.format(hAbout);
+    };
+    V.renderMovie = function (data) {
+      let content = document.querySelector("#content");
+      content.innerHTML = MovieCard.format(data);
+    };
+    V.renderDetails = function (data) {
+      let content = document.querySelector("#content");
+      content.innerHTML = detailsMovie.format(data);
+    };
+    V.renderMoviesCategory = function (data) {
         let content = document.querySelector("#content");
-        content.innerHTML = detailsMovie.format(data);
+        content.innerHTML = data.map(MovieCategory.format).join(""); // Format each category
       };
 
-      C.start(); // Démarre l'application
-    </script>
-  </body>
-</html>
+    C.start(); // Démarre l'application
+  </script>
+</body>
 
+</html>

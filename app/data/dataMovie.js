@@ -22,4 +22,9 @@ DataMovies.requestMovieDetails = async function (movieId) {
     return movieDetails;
 };
 
+DataMovies.requestMoviesCategory = async function () {
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=readMoviesCategory");
+    let categories = await answer.json();
+    return categories;
+  };
 export { DataMovies };
