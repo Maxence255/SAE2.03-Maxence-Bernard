@@ -55,24 +55,40 @@ function updateMovie($n, $y, $l, $d, $dr, $c, $i, $t, $a){
     $res = $stmt->rowCount(); 
     return $res; // Retourne le nombre de lignes affectées
 }
-function getMovieById($id) {
-    // Connexion à la base de données
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD); 
-    
-    // Requête SQL pour récupérer les informations d'un film spécifique
-    $sql = "SELECT * FROM Movie WHERE id = :id";
-    
-    // Prépare la requête SQL
-    $stmt = $cnx->prepare($sql);
-    
-    // Lie le paramètre :id à la valeur de $id
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    
-    // Exécute la requête SQL
-    $stmt->execute();
-    
-    // Récupère le résultat sous forme d'objet
-    $res = $stmt->fetch(PDO::FETCH_OBJ);
-    
-    return $res; // Retourne les informations du film
+function getMovieDetail($id) {
+    try {
+        
+        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ]);
+
+        
+        $sql = "SELECT 
+                    Movie.id, 
+                    Movie.name, 
+                    Movie.director, 
+                    Movie.year, 
+                    Movie.length, 
+                    Movie.description, 
+                    Movie.image, 
+                    Movie.trailer, 
+                    Movie.min_age, 
+                    Movie.id_category, 
+                    Category.name AS category
+                FROM Movie
+                JOIN Category ON Movie.id_category = Category.id
+                WHERE Movie.id = :id";
+
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        
+        $movieDetail = $stmt->fetch(PDO::FETCH_OBJ);
+
+        return $movieDetail; 
+    } catch (Exception $e) {
+        error_log("Erreur SQL : " . $e->getMessage()); // Log dans les erreurs PHP
+        return false;
+    }
 }

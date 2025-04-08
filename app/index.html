@@ -12,8 +12,6 @@
 
     <section id="content"></section>
 
-    <section id="details"></section>
-
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
 
@@ -33,6 +31,11 @@
         );
       };
 
+      C.handlerDetail = async function (movieId) {
+        let movieData = await DataMovies.requestMovieDetails(movieId); 
+        V.renderDetails(movieData); 
+        
+      };
       C.getAllMovies = async function () {
         let data = await DataMovies.requestMovies();
         V.renderMovie(data);
@@ -41,6 +44,7 @@
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
         C.getAllMovies();
+        
       };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -58,11 +62,11 @@
         header.innerHTML = NavBar.format(hAbout);
       };
       V.renderMovie = function (data) {
-        let content = document.querySelector("#content");
-        content.innerHTML = MovieCard.format(data);
-      };
+    let content = document.querySelector("#content");
+    content.innerHTML = MovieCard.format(data);
+};
       V.renderDetails = function (data) {
-        let content = document.querySelector("#details");
+        let content = document.querySelector("#content");
         content.innerHTML = detailsMovie.format(data);
       };
 
@@ -70,4 +74,4 @@
     </script>
   </body>
 </html>
-<script type="module"></script>
+

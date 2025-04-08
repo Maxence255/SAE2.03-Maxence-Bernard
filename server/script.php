@@ -58,22 +58,9 @@ if ( isset($_REQUEST['todo']) ){
       case 'updatemovie':
         $data = updateMoviesController();
         break;
-      case 'getmovie':
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $movie = getMovieById($id);
-            if ($movie) {
-                echo json_encode($movie); 
-            } else {
-                http_response_code(404);
-                echo json_encode(['error' => 'Film non trouvé']);
-            }
-        } else {
-            http_response_code(400);
-            echo json_encode(['error' => 'ID de film manquant']);
-        }
+        case 'readMovieDetail': // Nouveau cas pour récupérer les détails d'un film
+          $data = readMovieDetailController();
         break;
-
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
       echo json_encode('[error] Unknown todo value');
       http_response_code(400); // 400 == "Bad request"

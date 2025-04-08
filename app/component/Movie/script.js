@@ -7,16 +7,17 @@ let templateCards = await templateFile2.text();
 let MovieCard = {};
 
 MovieCard.format = function (obj) {
-  let html = template;
-  let cardsHTML="";
-  for(let c of obj){
-    let card =templateCards;
-    card = card.replace("{{image}}", c.image);
-    card = card.replace("{{name}}", c.name);
-    card = card.replace("{{onclick}}", `C.handlerDetail(${movie.id})`);
-  }
-  html=html.replace("{{cards}}", cardsHTML)
-  return html;
+    let html = template;
+    let cardsHTML = "";
+    for (let c of obj) {
+        let card = templateCards;
+        card = card.replace("{{image}}", c.image);
+        card = card.replace("{{name}}", c.name);
+        card = card.replace("{{onclick}}", `C.handlerDetail(${c.id})`);
+        cardsHTML += card;
+    }
+    html = html.replace("{{cards}}", cardsHTML);
+    return html;
 };
 
 export { MovieCard };

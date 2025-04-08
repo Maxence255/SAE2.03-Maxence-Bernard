@@ -1,21 +1,17 @@
 body{
   background-color: rgb(0, 0, 0);
 }
-.combo__card{
+.movie__details{
   display: flex;
-  flex-direction: column;
-  
-}
-.movie__card{
-  display: flex;
-flex-direction: row;
+flex-direction: column;
 justify-content: center;
 align-items: center;
 gap: 5rem;
+color : white;
 }
 .movie__img{
   max-width: 15rem;
 }
 .movie__title{
-  color: white;
+  color: rgb(255, 255, 255);
 }
