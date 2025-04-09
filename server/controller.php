@@ -69,4 +69,21 @@ function updateMoviesController(){
     $categories = getMoviesCategory();
     return $categories ? $categories : false;
   }
+  function addProfileController() {
+   $name = $_REQUEST['name'];
+    $avatar = $_REQUEST['avatar'];
+    $date_naissance = $_REQUEST['date_naissance'];
   
+    // Appel de la fonction addProfile déclarée dans model.php
+    $ok = addProfile($name, $avatar, $date_naissance);
+  
+    if ($ok != 0) {
+        return "$name a été ajouté ou remplacé avec succès";
+    } else {
+        return "Le profil n'a pas pu être ajouté ou remplacé";
+    }
+  }
+  function readControllerProfile(){
+    $profiles = readProfile();
+    return $profiles;
+  }

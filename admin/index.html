@@ -9,11 +9,14 @@
   <body>
     <section id="log"></section>
     <section id="NewMenuForm"></section>
+    <section id="addProfile"></section>
 
     <script type="module">
       import { Log } from "./component/Log/script.js";
       import { NewMenuForm } from "./component/NewMenuForm/script.js";
+      import { ProfileForm } from "./component/ProfileForm/script.js";
       import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfile } from "./data/dataProfile.js";
 
 
       window.C = {};
@@ -40,10 +43,18 @@
             V.renderLog(res);  
         }
 
+      C.handlerAddProfile = async function () {
+        let form = document.querySelector(".Menu-Profile__form");
+        let fd = new FormData(form);
+        let res = await DataProfile.addProfile(fd);
+        V.renderLog(res);
+      };
+
 
       C.start = function () {
         V.renderLog("Démarrage de l'application");
         V.renderNewMenuForm("C.handlerUpdate()");
+        V.renderAddProfile("C.handlerAddProfile()");
       };
 
 
@@ -56,6 +67,11 @@
       V.renderNewMenuForm = function (handlerU) {
         let content = document.querySelector("#NewMenuForm");
         content.innerHTML = NewMenuForm.format(handlerU);
+      };
+      V.renderAddProfile = async function (handler) {
+        let content = document.querySelector("#addProfile");
+        let profiles = await DataProfile.getProfiles();
+        content.innerHTML = ProfileForm.format(profiles, handler);
       };
 
       C.start();
