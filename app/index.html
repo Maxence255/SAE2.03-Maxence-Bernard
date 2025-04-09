@@ -33,8 +33,8 @@
         "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
       );
     };
-    C.getMovie = async function () {
-        let data = await DataMovie.requestMoviesCategory(); // On récupère les données par défaut et on attend avec await
+    C.getAllMovies = async function () {
+        let data = await DataMovies.requestMoviesCategory(); // On récupère les données par défaut et on attend avec await
         
         V.renderMoviesCategory(data);
       };
@@ -44,11 +44,11 @@
       V.renderDetails(movieData);
 
     };
-    C.getAllMovies = async function () {
-      let data = await DataMovies.requestMovies();
-      V.renderMovie(data);
+    // C.getAllMovies = async function () {
+    //   let data = await DataMovies.requestMovies();
+    //   V.renderMovie(data);
 
-    }
+    // }
     C.start = function () {
       V.renderNavBar("C.handlerAbout()");
       C.getAllMovies();
