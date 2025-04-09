@@ -19,14 +19,17 @@
 
     import { MovieCard } from "./component/Movie/script.js";
     import { detailsMovie } from "./component/Details/script.js";
-
     import { DataMovies } from "./data/dataMovie.js";
     import { MovieCategory } from "./component/MovieCategory/script.js";
+    import { DataProfile } from "./data/dataProfile.js";
 
     // Controleur
     // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
     // Une fois l'application terminée, on pourrait remettre let C.
     window.C = {};
+
+    C.profil = null;
+
 
     C.handlerAbout = function () {
       alert(
@@ -44,8 +47,15 @@
       V.renderDetails(movieData);
 
     };
-    C.start = function () {
-      V.renderNavBar("C.handlerAbout()");
+    C.handlerProfile = async function () {
+        const select = document.querySelector("#profile-select");
+        let dataProfile = await DataProfile.readOne(select.value);
+        C.profile = dataProfile[0];
+      //  C.getMovie(C.profile.min_age);
+      };
+    C.start = async function () {
+      let profiles = await DataProfile.read();
+      V.renderNavBar("C.handlerAbout()", profiles);
       C.getAllMovies();
 
     };
@@ -60,9 +70,9 @@
      * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
      * formaté par le composant NavBar.
      */
-    V.renderNavBar = function (hAbout) {
+    V.renderNavBar = function (hAbout, profiles) {
       let header = document.querySelector("#header");
-      header.innerHTML = NavBar.format(hAbout);
+      header.innerHTML = NavBar.format(hAbout, profiles);
     };
     V.renderMovie = function (data) {
       let content = document.querySelector("#content");
@@ -76,6 +86,7 @@
         let content = document.querySelector("#content");
         content.innerHTML = data.map(MovieCategory.format).join(""); // Format each category
       };
+      
 
     C.start(); // Démarre l'application
   </script>

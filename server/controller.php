@@ -70,12 +70,13 @@ function updateMoviesController(){
     return $categories ? $categories : false;
   }
   function addProfileController() {
+    $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
    $name = $_REQUEST['name'];
     $avatar = $_REQUEST['avatar'];
     $date_naissance = $_REQUEST['date_naissance'];
   
     // Appel de la fonction addProfile déclarée dans model.php
-    $ok = addProfile($name, $avatar, $date_naissance);
+    $ok = addProfile($id, $name, $avatar, $date_naissance);
   
     if ($ok != 0) {
         return "$name a été ajouté ou remplacé avec succès";
@@ -84,6 +85,13 @@ function updateMoviesController(){
     }
   }
   function readControllerProfile(){
-    $profiles = readProfile();
+      if (!isset($_REQUEST['id'])) {
+    $profiles = readProfile(); 
+  }
+  else{
+    $id = $_REQUEST['id'];
+    $profiles = readOneProfile($id); // Appel de la fonction getProfile
+  }
+ 
     return $profiles;
   }
