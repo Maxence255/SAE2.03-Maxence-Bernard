@@ -6,13 +6,14 @@ let HOST_URL = "https://mmi.unilim.fr/~bernard196/SAE2.03-Maxence-Bernard"; // C
 let DataMovies = {};
 
 
-DataMovies.requestMovies = async function () {
-
+DataMovies.requestMovies = async function (ageLimit) {
     let answer = await fetch(HOST_URL + "/server/script.php?todo=readmovies");
-
     let data = await answer.json();
 
-    return data;
+    // Filtrer les films en fonction de l'âge limite
+    let filteredMovies = data.filter(movie => movie.ageLimit <= ageLimit);
+
+    return filteredMovies;
 };
 DataMovies.requestMovieDetails = async function (movieId) {
     let url = HOST_URL + `/server/script.php?todo=readMovieDetail&id=${movieId}`;
@@ -26,5 +27,5 @@ DataMovies.requestMoviesCategory = async function () {
     let answer = await fetch(HOST_URL + "/server/script.php?todo=readMoviesCategory");
     let categories = await answer.json();
     return categories;
-  };
+};
 export { DataMovies };

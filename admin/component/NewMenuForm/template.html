@@ -1,13 +1,12 @@
 <div class="addMovie">
     <h4 class="addMovie__title"># Ajouter ou modifier un Movie</h4>
     <form class="addMovie__form">
-
-        <input required type="text" name="name" id="nom" placeholder="Saisir un titre" pattern="[^0-9]*" title="Numbers are not allowed">
-        <input required type="text" name="director" id="nom" placeholder="Saisir un réalisateur" pattern="[^0-9]*" title="Numbers are not allowed">
-        <input required type="text" name="year" id="nom" placeholder="Saisir une année" pattern="[^0-9]*" title="Numbers are not allowed">
-        <input required type="text" name="length" id="nom" placeholder="Saisir une durée." pattern="[^0-9]*" title="Numbers are not allowed">
-        <input required type="text" name="description" id="nom" placeholder="Saisir une description" pattern="[^0-9]*" title="Numbers are not allowed">
-        <select required type="text" name="id_category" id="nom" placeholder="Saisir une catégorie" pattern="[^0-9]*" title="Numbers are not allowed"> 
+        <input required type="text" name="name" id="movie-name" class="addMovie__input" placeholder="Saisir un titre" pattern="[^0-9]*" title="Numbers are not allowed">
+        <input required type="text" name="director" id="movie-director" class="addMovie__input" placeholder="Saisir un réalisateur" pattern="[^0-9]*" title="Numbers are not allowed">
+        <input required type="text" name="year" id="movie-year" class="addMovie__input" placeholder="Saisir une année" pattern="[0-9]*" title="Only numbers are allowed">
+        <input required type="text" name="length" id="movie-length" class="addMovie__input" placeholder="Saisir une durée" pattern="[0-9]*" title="Only numbers are allowed">
+        <input required type="text" name="description" id="movie-description" class="addMovie__input" placeholder="Saisir une description" pattern="[^0-9]*" title="Numbers are not allowed">
+        <select required name="id_category" id="movie-category" class="addMovie__select">
             <option value="" disabled selected>Sélectionner une catégorie</option>
             <option value="1">Action</option>
             <option value="2">Comédie</option>
@@ -17,13 +16,12 @@
             <option value="6">Thriller</option>
             <option value="7">Horreur</option>
             <option value="8">Aventure</option>
-            <option value="8">Fantaisie</option>
-            <option value="8">Documentaire</option>
+            <option value="9">Fantaisie</option>
+            <option value="10">Documentaire</option>
         </select>
-        
-            <input required type="text" name="image" id="nom" placeholder="Saisir une image" pattern="[^0-9]*" title="Numbers are not allowed">
-        <input required type="text" name="trailer" id="nom" placeholder="Saisir une url" pattern="[^0-9]*" title="Numbers are not allowed">
-        <input required type="text" name="min_age" id="nom" placeholder="Saisir un age" pattern="[^0-9]*" title="Numbers are not allowed">
-        <input onclick="{{handlerUpdate}}" type="button" value="Update" name="todo" required>
+        <input required type="text" name="image" id="movie-image" class="addMovie__input" placeholder="Saisir une image" pattern="[^0-9]*" title="Numbers are not allowed">
+        <input required type="text" name="trailer" id="movie-trailer" class="addMovie__input" placeholder="Saisir une URL" pattern="[^0-9]*" title="Numbers are not allowed">
+        <input required type="text" name="min_age" id="movie-min-age" class="addMovie__input" placeholder="Saisir un âge minimum" pattern="[0-9]*" title="Only numbers are allowed">
+        <input onclick="{{handlerUpdate}}" type="button" value="Update" class="addMovie__button" name="todo">
     </form>
 </div>

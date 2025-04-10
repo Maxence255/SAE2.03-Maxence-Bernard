@@ -1,21 +1,103 @@
+/* Barre de navigation */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 3rem;
+
   color: var(--color-fg);
   background-color: var(--color-bg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .navbar__item {
-    --_offset: 0.2rem;
-    padding: 0.5rem 1rem;
-    text-decoration: underline;
-    text-decoration-thickness: 0.1rem;
-    text-underline-offset: var(--_offset);
-    cursor: pointer;
-    transition: text-underline-offset 0.2s ease-in-out;
-    &:hover {
-      --_offset: 0.5rem;
-    }
-  }
+/* Liste des liens */
+.navbar__list {
+  display: flex;
+  gap: 2rem;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Liens de navigation */
+.navbar__item {
+  display: inline-block;
+
+  position: relative;
+  padding: 0.5rem 1rem;
+
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 0.1rem;
+  text-underline-offset: 0.2rem;
+  color: var(--color-fg);
+  cursor: pointer;
+
+  transition: text-underline-offset 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.navbar__item:hover {
+  text-underline-offset: 0.5rem;
+  color: var(--color-button-hover);
+}
+
+/* Section profil */
+.navbar__profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  position: relative;
+}
+
+/* Label du profil */
+.navbar__label {
+  display: inline-block;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-fg);
+}
+
+/* Sélecteur de profil */
+.navbar__select {
+  display: inline-block;
+
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-gray-light);
+  border-radius: 0.5rem;
+
+  font-size: 1rem;
+  font-family: var(--ff-sans);
+  color: var(--color-black);
+  background-color: var(--color-white);
+
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.navbar__select:focus {
+  border-color: var(--color-button-hover);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Image du profil */
+.navbar__picture {
+  display: inline-block;
+
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+
+  border: 2px solid var(--color-gray-light);
+  background-color: var(--color-gray-light);
+
+  transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.navbar__picture:hover {
+  border-color: var(--color-button-hover);
+  transform: scale(1.1);
 }

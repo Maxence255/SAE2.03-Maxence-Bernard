@@ -12,4 +12,7 @@
   /* Sementic Tokens */
   --color-fg: var(--color-white);
   --color-bg: var(--color-gray-dark);
+
+  --color-button-hover: hsl(0, 0%, 70%);
+  --color-button-active: hsl(0, 0%, 30%);
 }

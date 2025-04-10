@@ -1,17 +1,146 @@
-body{
-  background-color: rgb(255, 255, 255);
+/* Corps de la page */
+body {
+  display: block;
+
+  position: relative;
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-black);
+
+  font-family: var(--ff-sans);
+  font-size: 1rem;
+  color: var(--color-fg);
+
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1));
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
-.movie__details{
+
+/* Détails d'un film */
+.movie__details {
   display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 5rem;
-color : white;
+  flex-direction: column;
+  gap: 2rem;
+
+  position: relative;
+  width: 90%;
+  margin: 2rem auto;
+
+  box-sizing: border-box;
+  padding: 2rem;
+
+  font-size: 1.2rem;
+  color: var(--color-fg);
+
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 1rem;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
 }
-.movie__img{
+
+/* En-tête du film */
+.movie__header {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+
+  position: relative;
+  width: 100%;
+}
+
+/* Image du film */
+.movie__img {
+  display: block;
+
+  position: relative;
+  width: 100%;
   max-width: 15rem;
+  border-radius: 0.5rem;
+
+  box-sizing: border-box;
+  background-color: var(--color-gray-light);
+
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
-.movie__title{
-  color: rgb(255, 255, 255);
+
+.movie__img:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Informations du film */
+.movie__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  position: relative;
+  gap: 1rem;
+
+  font-size: 1rem;
+  color: var(--color-gray-light);
+}
+
+.movie__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-fg);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.movie__description {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--color-gray-light);
+}
+
+.movie__release,
+.movie__duration,
+.movie__rating,
+.movie__genre,
+.movie__age {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-gray-light);
+}
+
+.movie__release strong,
+.movie__duration strong,
+.movie__rating strong,
+.movie__genre strong,
+.movie__age strong {
+  color: var(--color-fg);
+}
+
+/* Bande-annonce */
+.movie__trailer-container {
+  display: flex;
+  justify-content: center;
+
+  position: relative;
+  width: 100%;
+}
+
+.movie__trailer {
+  display: block;
+
+  position: relative;
+  width: 100%;
+  max-width: 35rem;
+  height: 20rem;
+
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0.5rem;
+
+  background-color: var(--color-gray-dark);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie__trailer:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
 }

@@ -6,7 +6,7 @@ let NavBar = {};
 NavBar.format = function (hAbout, profiles) {
   let html = template;
   html = html.replace("{{hAbout}}", hAbout);
-  
+
   let options = `<option value="">Choisir un profil</option>`; // Option par défaut
   for (let i = 0; i < profiles.length; i++) {
     let p = profiles[i];
@@ -17,7 +17,7 @@ NavBar.format = function (hAbout, profiles) {
 
   html = html.replace("{{options}}", options);
   html = html.replace("{{image}}", image);
-  html = html.replace("{{handler}}", "C.handlerProfile()");
+  html = html.replace("{{handler}}", "C.handlerProfileChange(this)");
   return html;
 };
 

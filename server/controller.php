@@ -20,9 +20,14 @@
  */
 require("model.php");
 
-function readMoviesController(){
-    $movies = getAllMovies();
-    return $movies;
+function readMoviesController() {
+  // Vérifie si le paramètre 'age' est défini dans la requête
+  $age = isset($_REQUEST['age']) ? intval($_REQUEST['age']) : 0;
+
+  // Appelle la fonction du modèle en passant l'âge minimum
+  $movies = getMoviesByAge($age);
+
+  return $movies;
 }
 
 function updateMoviesController(){

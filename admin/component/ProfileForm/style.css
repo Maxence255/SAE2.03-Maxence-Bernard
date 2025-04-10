@@ -1,40 +1,115 @@
-.addMovie {
-    width:30rem;
-}
-
-.addMovie__title {
-    margin-bottom: 0.2rem;
-    color: #fff;
-  
-}
-
-.addMovie__form {
+/* Conteneur principal */
+.menu-profile {
     display: flex;
     flex-direction: column;
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgb(255, 255, 255);
-    padding:1.5rem;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+
+    box-sizing: border-box;
+    border: 1px solid var(--color-gray);
+    border-radius: 8px;
+    background-color: var(--color-bg);
+
+    font-family: var(--ff-sans);
+    font-size: 16px;
+    color: var(--color-fg);
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.addMovie__form select {
-    font-size: medium;
-    border-style: none;
-    margin-top: .8rem;
+/* Titre */
+.menu-profile__title {
+    display: block;
+
+    position: relative;
+    margin-bottom: 20px;
+
+    box-sizing: border-box;
+
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-fg);
+
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.addMovie__form input {
-    margin-top: .8rem;
-    font-size: medium;
-    border-style: none;
+/* Formulaire */
+.menu-profile__form {
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    width: 100%;
+
+    box-sizing: border-box;
+
+    font-size: 16px;
+
+    background-color: transparent;
+}
+
+/* Champs de saisie */
+.menu-profile__input {
+    display: block;
+
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+
+    box-sizing: border-box;
+    border: 1px solid var(--color-gray-light);
+    border-radius: 4px;
+
+    font-size: 14px;
+    color: var(--color-black);
+
+    background-color: var(--color-white);
+
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-profile__input:focus {
+    border-color: var(--color-gray);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Bouton */
+.menu-profile__button {
     display: inline-block;
-    height: 2rem;
-    
+
+    position: relative;
+    width: auto;
+    padding: 10px 20px;
+    margin-top: 10px;
+
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: var(--color-white);
+
+    background-color: var(--color-gray);
+    cursor: pointer;
+
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.addMovie__form input[type=button] {
-    background-color: rgb(113, 91, 69);
-    color:#fff;
-    
-   
+.menu-profile__button:hover {
+    background-color: var(--color-gray-light);
+    transform: scale(1.05);
+}
+
+.menu-profile__button:active {
+    background-color: var(--color-gray-dark);
+    transform: scale(0.95);
 }
