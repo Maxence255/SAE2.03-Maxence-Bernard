@@ -44,7 +44,7 @@
         }
 
       C.handlerAddProfile = async function () {
-        let form = document.querySelector(".Menu-Profile__form");
+        let form = document.querySelector(".menu-profile__form");
         let fd = new FormData(form);
         let res = await DataProfile.addProfile(fd);
         V.renderLog(res);

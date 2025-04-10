@@ -48,11 +48,38 @@
 
     };
     C.handlerProfile = async function () {
-      const select = document.querySelector("#profile-select");
-      let dataProfile = await DataProfile.readOne(select.value);
-      C.profile = dataProfile[0];
-      //  C.getMovie(C.profile.min_age);
-    };
+  const select = document.querySelector("#profile-select");
+  let dataProfile = await DataProfile.readOne(select.value);
+  C.profile = dataProfile[0];
+  console.log("Profil chargé :", C.profile);
+
+  // Calcul de l'âge du profil
+  const birthDate = new Date(C.profile.date_naissance);
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  let allMovies = await DataMovies.requestMoviesCategory();
+  console.log("Films récupérés :", allMovies);
+
+  // Filtrer les films selon l’âge
+  console.log("Âge du profil :", age); // Affiche l'âge du profil
+
+let filteredCategories = allMovies.map(category => {
+  return {
+    ...category,
+    movies: category.movies.filter(movie => {
+      console.log(`Vérifie "${movie.title}" (âge min: ${movie.min_age})`);
+      return movie.min_age <= age;
+    })
+  };
+});
+
+  V.renderMoviesCategory(filteredCategories);
+};
     C.setProfilImage = function (imageName) {
       const profileImage = document.querySelector("#profile-picture");
       const defaultImage =
@@ -65,11 +92,17 @@
 
     }
     C.handlerProfileChange = function (selectElement) {
-      const selectedOption =
-        selectElement.options[selectElement.selectedIndex];
-      const newImage = selectedOption.dataset.img; // Récupère l'attribut data-img
-      C.setProfilImage(newImage);
-    }
+  const selectedOption = selectElement.options[selectElement.selectedIndex];
+  const newImage = selectedOption.dataset.img;
+
+  // Met à jour l'image
+  C.setProfilImage(newImage);
+
+  // Recharge les films en filtrant selon le profil sélectionné
+  C.handlerProfile();
+};
+
+    
     C.start = async function () {
       let profiles = await DataProfile.read();
       V.renderNavBar("C.handlerAbout()", profiles);
@@ -101,9 +134,25 @@
       content.innerHTML = detailsMovie.format(data);
     };
     V.renderMoviesCategory = function (data) {
-      let content = document.querySelector("#content");
-      content.innerHTML = data.map(MovieCategory.format).join(""); // Format each category
-    };
+  let content = document.querySelector("#content");
+
+  // Pour chaque catégorie dans les données, vérifie si elle a des films
+  content.innerHTML = data.map(category => {
+    // Vérifie si la catégorie a des films
+    if (category.movies && category.movies.length > 0) {
+      // Si des films existent dans cette catégorie, on affiche les films
+      return MovieCategory.format(category);
+    } else {
+      // Si pas de films dans la catégorie, afficher le message approprié
+      return `
+        <div class="category">
+          <h2>${category.name}</h2>
+          <p class='no-movies'>Aucun film disponible dans cette catégorie.</p>
+        </div>
+      `;
+    }
+  }).join("");
+};
 
 
     C.start(); // Démarre l'application
