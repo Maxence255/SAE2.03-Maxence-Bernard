@@ -181,28 +181,4 @@ function readOneProfile($id) {
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; // Retourne les résultats
 }
-function getMoviesByAge($age) {
-    try {
-        // Connexion à la base de données
-        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        ]);
 
-        // Requête SQL pour récupérer les films dont l'âge minimum est inférieur ou égal à l'âge fourni
-        $sql = "SELECT id, name, image, min_age 
-                FROM Movie 
-                WHERE min_age <= :age";
-
-        $stmt = $cnx->prepare($sql);
-        $stmt->bindParam(':age', $age, PDO::PARAM_INT);
-        $stmt->execute();
-
-        // Récupère les résultats sous forme d'objets
-        $movies = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-        return $movies;
-    } catch (Exception $e) {
-        error_log("Erreur SQL : " . $e->getMessage());
-        return false;
-    }
-}

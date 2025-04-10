@@ -41,16 +41,7 @@
 
       V.renderMoviesCategory(data);
     };
-    //     C.getAllMovies = async function () {
-    //   // Vérifie si un profil est sélectionné
-    //   const ageLimit = C.profile ? C.profile.age : 0;
 
-    //   // Appelle DataMovies.requestMovies avec l'âge limite
-    //   let data = await DataMovies.requestMovies(ageLimit);
-
-    //   // Rend les catégories de films filtrées
-    //   V.renderMoviesCategory(data);
-    // };
     C.handlerDetail = async function (movieId) {
       let movieData = await DataMovies.requestMovieDetails(movieId);
       V.renderDetails(movieData);
