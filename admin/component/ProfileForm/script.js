@@ -24,6 +24,7 @@ ProfileForm.init = function () {
   const nameField = document.getElementById("profile-name");
   const avatarField = document.getElementById("profile-avatar");
   const minAgeField = document.getElementById("profile-min-age");
+  console.log(select, idField, nameField, avatarField, minAgeField);
 
   // Remplit les champs en fonction du profil sélectionné
   select.addEventListener("change", (event) => {
@@ -32,7 +33,7 @@ ProfileForm.init = function () {
           idField.value = selectedOption.value || "";
           nameField.value = selectedOption.dataset.name || "";
           avatarField.value = selectedOption.dataset.avatar || "";
-          minAgeField.value = selectedOption.dataset.age || "";
+          minAgeField.value = selectedOption.dataset.age ? selectedOption.dataset.age : "";
       }
   });
 };

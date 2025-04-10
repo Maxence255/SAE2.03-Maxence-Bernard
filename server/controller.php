@@ -70,6 +70,7 @@ function updateMoviesController(){
     return $categories ? $categories : false;
   }
   function addProfileController() {
+    
     $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
    $name = $_REQUEST['name'];
     $avatar = $_REQUEST['avatar'];
