@@ -1,10 +1,10 @@
-let templateFile = await fetch('./component/ProfileForm/template.html');
+let templateFile = await fetch('./component/ProfileModifForm/template.html');
 let template = await templateFile.text();
 
 
-let ProfileForm = {};
+let ProfileModifForm = {};
 
-ProfileForm.format = function (profiles, handler) {
+ProfileModifForm.format = function (profiles, handler) {
   let html = template;
   let options = "";
   for (let i = 0; i < profiles.length; i++) {
@@ -18,12 +18,13 @@ ProfileForm.format = function (profiles, handler) {
 };
 
 // Initialise les champs et les événements du formulaire
-ProfileForm.init = function () {
+ProfileModifForm.init = function () {
   const select = document.getElementById("profile-select");
   const idField = document.getElementById("profile-id");
   const nameField = document.getElementById("profile-name");
   const avatarField = document.getElementById("profile-avatar");
   const minAgeField = document.getElementById("profile-min-age");
+  console.log(select, idField, nameField, avatarField, minAgeField);
 
   // Remplit les champs en fonction du profil sélectionné
   select.addEventListener("change", (event) => {
@@ -32,9 +33,9 @@ ProfileForm.init = function () {
           idField.value = selectedOption.value || "";
           nameField.value = selectedOption.dataset.name || "";
           avatarField.value = selectedOption.dataset.avatar || "";
-          minAgeField.value = selectedOption.dataset.age || "";
+          minAgeField.value = selectedOption.dataset.age ? selectedOption.dataset.age : "";
       }
   });
 };
 
-export {ProfileForm};
+export {ProfileModifForm};

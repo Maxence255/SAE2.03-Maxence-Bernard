@@ -56,5 +56,4 @@ DataProfile.getProfiles = async function () {
   return data;
 };
 
-
 export { DataProfile };

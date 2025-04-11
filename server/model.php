@@ -155,6 +155,25 @@ function addProfile($id, $name, $avatar, $date_naissance) {
     $res = $stmt->rowCount();
     return $res; // Retourne le nombre de lignes affectées par l'opération
 }
+function modProfile($id, $name, $avatar, $date_naissance) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+    // Utilisation de REPLACE INTO pour insérer ou remplacer une ligne
+    $sql = "REPLACE INTO Profil (id, name, avatar, date_naissance) 
+            VALUES (:id, :name, :avatar, :date_naissance)";
+
+    $stmt = $cnx->prepare($sql);
+
+    // Liaison des paramètres
+    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':avatar', $avatar);
+    $stmt->bindParam(':date_naissance', $date_naissance);
+
+    $stmt->execute();
+    $res = $stmt->rowCount();
+    return $res; // Retourne le nombre de lignes affectées par l'opération
+}
 function readProfile() {
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);

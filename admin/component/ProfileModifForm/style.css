@@ -1,5 +1,5 @@
 /* Conteneur principal */
-.profil-modif-form {
+.menu-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,7 +23,7 @@
 }
 
 /* Titre */
-.profil-modif-form__title {
+.menu-profile__title {
     display: block;
 
     position: relative;
@@ -40,7 +40,7 @@
 }
 
 /* Formulaire */
-.profil-modif-form__form {
+.menu-profile__form {
     display: flex;
     flex-direction: column;
 
@@ -55,7 +55,7 @@
 }
 
 /* Champs de saisie */
-.profil-modif-form__input {
+.menu-profile__input {
     display: block;
 
     position: relative;
@@ -75,13 +75,13 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.profil-modif-form__input:focus {
+.menu-profile__input:focus {
     border-color: var(--color-gray);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Bouton */
-.profil-modif-form__button {
+.menu-profile__button {
     display: inline-block;
 
     position: relative;
@@ -104,12 +104,12 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.profil-modif-form__button:hover {
+.menu-profile__button:hover {
     background-color: var(--color-gray-light);
     transform: scale(1.05);
 }
 
-.profil-modif-form__button:active {
+.menu-profile__button:active {
     background-color: var(--color-gray-dark);
     transform: scale(0.95);
 }

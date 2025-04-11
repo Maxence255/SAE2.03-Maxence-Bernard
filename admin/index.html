@@ -10,11 +10,13 @@
     <section id="log"></section>
     <section id="NewMenuForm"></section>
     <section id="addProfile"></section>
+    <section id="modProfile"></section>
 
     <script type="module">
       import { Log } from "./component/Log/script.js";
       import { NewMenuForm } from "./component/NewMenuForm/script.js";
       import { ProfileForm } from "./component/ProfileForm/script.js";
+      import { ProfileModifForm } from "./component/ProfileModifForm/script.js";
       import { DataMovie } from "./data/dataMovie.js";
       import { DataProfile } from "./data/dataProfile.js";
 
@@ -49,12 +51,19 @@
         let res = await DataProfile.addProfile(fd);
         V.renderLog(res);
       };
+      C.handlerModProfile = async function () {
+        let form = document.querySelector(".profil-modif__form");
+        let fd = new FormData(form);
+        let res = await DataProfile.addProfile(fd);
+        V.renderLog(res);
+      };
 
 
       C.start = function () {
         V.renderLog("Démarrage de l'application");
         V.renderNewMenuForm("C.handlerUpdate()");
         V.renderAddProfile("C.handlerAddProfile()");
+        V.renderModProfile("C.handlerModProfile()");
       };
 
 
@@ -72,7 +81,15 @@
         let content = document.querySelector("#addProfile");
         let profiles = await DataProfile.getProfiles();
         content.innerHTML = ProfileForm.format(profiles, handler);
-        ProfileForm.init();
+        
+      };
+      V.renderModProfile = async function (handler) {
+        let content = document.querySelector("#modProfile");
+        let profiles = await DataProfile.getProfiles();
+        content.innerHTML = ProfileModifForm.format(profiles, handler);
+        
+        ProfileModifForm.init();
+        
       };
 
       C.start();
