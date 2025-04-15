@@ -20,8 +20,10 @@
     import { MovieCard } from "./component/Movie/script.js";
     import { detailsMovie } from "./component/Details/script.js";
     import { DataMovies } from "./data/dataMovie.js";
+    import { DataMovie } from "./data/dataMovie.js";
     import { MovieCategory } from "./component/MovieCategory/script.js";
     import { DataProfile } from "./data/dataProfile.js";
+    import { Favoris } from "./component/Favoris/script.js";
 
     // Controleur
     // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -30,7 +32,19 @@
 
     C.profil = null;
 
+    C.addToFavorites = function (id) {
+      // Récupère les favoris existants depuis le localStorage (ou crée une liste vide)
+      let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
+      // Si l'ID n'est pas déjà dans la liste, on l'ajoute
+      if (!favorites.includes(id)) {
+        favorites.push(id);
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+        alert("Ajouté aux favoris !");
+      } else {
+        alert("Ce film est déjà dans vos favoris !");
+      }
+    };
     C.handlerAbout = function () {
       alert(
         "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
@@ -48,38 +62,54 @@
 
     };
     C.handlerProfile = async function () {
-  const select = document.querySelector("#profile-select");
-  let dataProfile = await DataProfile.readOne(select.value);
-  C.profile = dataProfile[0];
-  console.log("Profil chargé :", C.profile);
+      const select = document.querySelector("#profile-select");
+      let dataProfile = await DataProfile.readOne(select.value);
+      C.profile = dataProfile[0];
+      console.log("Profil chargé :", C.profile);
 
-  // Calcul de l'âge du profil
-  const birthDate = new Date(C.profile.date_naissance);
-  const today = new Date();
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const m = today.getMonth() - birthDate.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-    age--;
-  }
+      // Calcul de l'âge du profil
+      const birthDate = new Date(C.profile.date_naissance);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
 
-  let allMovies = await DataMovies.requestMoviesCategory();
-  console.log("Films récupérés :", allMovies);
+      let allMovies = await DataMovies.requestMoviesCategory();
+      console.log("Films récupérés :", allMovies);
 
-  // Filtrer les films selon l’âge
-  console.log("Âge du profil :", age); // Affiche l'âge du profil
+      // Filtrer les films selon l’âge
+      console.log("Âge du profil :", age); // Affiche l'âge du profil
 
-let filteredCategories = allMovies.map(category => {
-  return {
-    ...category,
-    movies: category.movies.filter(movie => {
-      console.log(`Vérifie "${movie.title}" (âge min: ${movie.min_age})`);
-      return movie.min_age <= age;
-    })
-  };
-});
+      let filteredCategories = allMovies.map(category => {
+        return {
+          ...category,
+          movies: category.movies.filter(movie => {
+            console.log(`Vérifie "${movie.title}" (âge min: ${movie.min_age})`);
+            return movie.min_age <= age;
+          })
+        };
+      });
 
-  V.renderMoviesCategory(filteredCategories);
-};
+      V.renderMoviesCategory(filteredCategories);
+    };
+
+    C.loadFavorites = async function (id_profil) {
+      const response = await fetch(`./php/script.php?todo=getFavorites&id_profil=${id_profil}`);
+      const favorites = await response.json();
+
+      let html = "";
+      for (let movie of favorites) {
+        html += `
+      <div class="favorite-card">
+        <img src="../server/images/${movie.image}" alt="${movie.name}">
+        <h4>${movie.name}</h4>
+      </div>
+    `;
+      }
+      document.getElementById("favorites-container").innerHTML = html;
+    };
     C.setProfilImage = function (imageName) {
       const profileImage = document.querySelector("#profile-picture");
       const defaultImage =
@@ -92,17 +122,89 @@ let filteredCategories = allMovies.map(category => {
 
     }
     C.handlerProfileChange = function (selectElement) {
-  const selectedOption = selectElement.options[selectElement.selectedIndex];
-  const newImage = selectedOption.dataset.img;
+      const selectedOption = selectElement.options[selectElement.selectedIndex];
+      const newImage = selectedOption.dataset.img;
 
-  // Met à jour l'image
-  C.setProfilImage(newImage);
+      // Met à jour l'image
+      C.setProfilImage(newImage);
 
-  // Recharge les films en filtrant selon le profil sélectionné
-  C.handlerProfile();
-};
+      // Recharge les films en filtrant selon le profil sélectionné
+      C.handlerProfile();
+    };
+    C.handlerFavorisList = async function () {
+        // Récupérer l'ID du profil actif
+        const profileSelect = document.querySelector("#profile-select");
+        const profileId = profileSelect ? profileSelect.value : null;
 
-    
+        if (!profileId) {
+          alert("Veuillez sélectionner un profil pour voir les favoris.");
+          return;
+        }
+
+        // Récupérer les films favoris pour le profil actif
+        let favoris = await DataMovie.getFavoris(profileId);
+
+        if (!favoris || favoris.length === 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucun film ajouté aux favoris.</p>";
+        } else {
+          // Afficher les films favoris
+          V.renderMovie(favoris);
+        }
+      };
+    C.handlerFavoris = async function (id) {
+        console.log(`C.handlerFavoris appelé avec movieId=${id}`);
+        const profileSelect = document.querySelector("#profile-select");
+        const profileId = profileSelect ? profileSelect.value : null;
+
+        if (!profileId) {
+          alert(
+            "Veuillez sélectionner un profil avant d'ajouter un film aux favoris."
+          );
+          return;
+        }
+
+        // Vérifier si le film est déjà dans les favoris
+        let favoris = await DataMovie.getFavoris(profileId);
+        if (favoris.some((movie) => movie.id === id)) {
+          alert("Ce film a déjà été ajouté à vos favoris !");
+          return;
+        }
+
+        let res = await DataMovie.addFavoris(id, profileId);
+
+        if (res === 1) {
+          alert("Le film a été ajouté à vos favoris !");
+        }
+      };
+      C.handlerdeleteFavoris = async function (id) {
+        const profileSelect = document.querySelector("#profile-select");
+        const profileId = profileSelect ? profileSelect.value : null;
+
+        if (!profileId) {
+          alert(
+            "Veuillez sélectionner un profil avant de supprimer un film des favoris."
+          );
+          return;
+        }
+
+        let res = await DataMovie.deleteFavoris(id, profileId);
+
+        if (res === 1) {
+          alert("Le film a été supprimé de vos favoris !");
+
+          // Vérifier si la liste des favoris est vide
+          let favoris = await DataMovie.getFavoris(profileId);
+          if (!favoris || favoris.length === 0) {
+            alert("Votre liste de favoris est vide");
+          } else {
+            // Réafficher les favoris restants
+            V.renderMovie(favoris);
+          }
+        } else {
+          alert("Ce film n'est pas dans vos favoris");
+        }
+      };
     C.start = async function () {
       let profiles = await DataProfile.read();
       V.renderNavBar("C.handlerAbout()", profiles);
@@ -134,25 +236,29 @@ let filteredCategories = allMovies.map(category => {
       content.innerHTML = detailsMovie.format(data);
     };
     V.renderMoviesCategory = function (data) {
-  let content = document.querySelector("#content");
+      let content = document.querySelector("#content");
 
-  // Pour chaque catégorie dans les données, vérifie si elle a des films
-  content.innerHTML = data.map(category => {
-    // Vérifie si la catégorie a des films
-    if (category.movies && category.movies.length > 0) {
-      // Si des films existent dans cette catégorie, on affiche les films
-      return MovieCategory.format(category);
-    } else {
-      // Si pas de films dans la catégorie, afficher le message approprié
-      return `
+      // Pour chaque catégorie dans les données, vérifie si elle a des films
+      content.innerHTML = data.map(category => {
+        // Vérifie si la catégorie a des films
+        if (category.movies && category.movies.length > 0) {
+          // Si des films existent dans cette catégorie, on affiche les films
+          return MovieCategory.format(category);
+        } else {
+          // Si pas de films dans la catégorie, afficher le message approprié
+          return `
         <div class="category">
           <h2>${category.name}</h2>
           <p class='no-movies'>Aucun film disponible dans cette catégorie.</p>
         </div>
       `;
-    }
-  }).join("");
-};
+        }
+      }).join("");
+    };
+    V.renderFavoris = function (data) {
+      let content = document.querySelector("#content");
+      content.innerHTML = Favoris.format(data);
+    };
 
 
     C.start(); // Démarre l'application

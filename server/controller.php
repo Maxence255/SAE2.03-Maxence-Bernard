@@ -96,3 +96,31 @@ function updateMoviesController(){
  
     return $profiles;
   }
+  function addFavorisController() {
+    $movieId = $_REQUEST['movieId'] ?? null;
+    $profileId = $_REQUEST['profileId'] ?? null;
+    if ($movieId && $profileId) {
+        $result = addFavoris($movieId, $profileId); // Appelle la fonction dans model.php
+        return $result;
+    }
+};
+
+function getFavorisController() {
+    $profileId = $_REQUEST['profileId'] ?? null;
+
+    if (!$profileId) {
+        error_log("Aucun profileId reçu dans getFavorisController");
+        return false;
+    }
+    
+        $movies = getFavoris($profileId); // on passe uniquement le profileId
+        return $movies;
+}
+function deleteFavorisController() {
+  $movieId = $_REQUEST['movieId'] ?? null;
+  $profileId = $_REQUEST['profileId'] ?? null;
+  if ($movieId && $profileId) {
+      $result = deleteFavoris($movieId, $profileId); // Appelle la fonction dans model.php
+      return $result;
+  }
+};

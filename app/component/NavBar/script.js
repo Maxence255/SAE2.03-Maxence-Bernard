@@ -6,6 +6,7 @@ let NavBar = {};
 NavBar.format = function (hAbout, profiles) {
   let html = template;
   html = html.replace("{{hAbout}}", hAbout);
+  html = html.replace("{{onclick}}", "C.handlerFavorisList()");
 
   let options = `<option value="">Choisir un profil</option>`; // Option par défaut
   for (let i = 0; i < profiles.length; i++) {
@@ -14,11 +15,11 @@ NavBar.format = function (hAbout, profiles) {
   }
 
   let image = profiles[0]?.avatar || "";
+  let id = profiles[0]?.id || 0;
 
   html = html.replace("{{options}}", options);
   html = html.replace("{{image}}", image);
   html = html.replace("{{handler}}", "C.handlerProfileChange(this)");
   return html;
 };
-
 export { NavBar };

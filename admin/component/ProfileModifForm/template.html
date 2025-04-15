@@ -1,14 +1,14 @@
 <div class="menu-profile">
     <h4 class="menu-profile__title"># Ajouter ou modifier un Profil</h4>
     <form class="profil-modif__form">
-        <select id="profile-select" class="menu-profile__input" name="profile" required>
+        <select id="profile-select-Mod" class="menu-profile__input" name="profile" required>
             <option value="">Sélectionner un profil existant</option>
             {{options}}
         </select>
-        <input id="profile-id" type="hidden" name="id" value="">
-        <input id="profile-name" class="menu-profile__input" type="text" name="name" placeholder="Nom du profil" required>
-        <input id="profile-avatar" class="menu-profile__input" type="text" name="avatar" placeholder="Avatar ou image associée (Non obligatoire)">
-        <input id="profile-min-age" class="menu-profile__input" type="date" name="date_naissance" placeholder="Restrictions d'âge" required>
+        <input id="profile-id-Mod" type="hidden" name="id" value="">
+        <input id="profile-name-Mod" class="menu-profile__input" type="text" name="name" placeholder="Nom du profil" required>
+        <input id="profile-avatar-Mod" class="menu-profile__input" type="text" name="avatar" placeholder="Avatar ou image associée (Non obligatoire)">
+        <input id="profile-min-age-Mod" class="menu-profile__input" type="date" name="date_naissance" placeholder="Restrictions d'âge" required>
         <input onclick="{{handler}}" class="menu-profile__button" type="button" value="Ajouter" name="todo">
     </form>
 </div>

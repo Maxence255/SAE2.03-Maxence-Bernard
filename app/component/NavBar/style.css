@@ -101,3 +101,25 @@
   border-color: var(--color-button-hover);
   transform: scale(1.1);
 }
+.card__favoris {
+  position: absolute;
+  bottom: 3rem;
+  right: 0.2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.heart-icon {
+  fill: none;
+  stroke: #ff0000;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+.card__deletefavoris {
+  position: absolute;
+  bottom: 3.7rem;
+  left: 0.2rem;
+  background: none;
+  border: none;
+}
