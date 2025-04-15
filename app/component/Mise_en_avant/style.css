@@ -1,0 +1,102 @@
+/* Section principale pour les films à l'affiche */
+.featured-movies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  margin: 2rem auto;
+  padding: 1rem;
+
+  box-sizing: border-box;
+
+  background-color: var(--color-gray-dark);
+}
+
+/* Titre principal de la section */
+.featured-movies__component-name {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-fg);
+
+  margin-bottom: 2rem;
+
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Conteneur des cartes */
+.featured-movies-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+
+  width: 100%;
+  max-width: 1200px;
+
+  box-sizing: border-box;
+}
+
+/* Carte individuelle */
+.featured-movies-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 15rem;
+  padding: 1rem;
+  margin: 1rem;
+
+  box-sizing: border-box;
+  border: 1px solid var(--color-gray-light);
+  border-radius: 8px;
+
+  background-color: var(--color-gray-dark);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-movies-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Image de la carte */
+.featured-movies__img {
+  width: 100%;
+  max-width: 15rem;
+  margin-bottom: 1rem;
+
+  border-radius: 4px;
+
+  background-color: var(--color-gray-light);
+
+  transition: opacity 0.3s ease;
+}
+
+.featured-movies__img:hover {
+  opacity: 0.8;
+}
+
+/* Titre de la carte */
+.featured-movies__titre {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-fg);
+
+  margin-top: 0.5rem;
+
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Description de la carte */
+.featured-movies__description {
+  font-size: 1rem;
+  text-align: center;
+  color: var(--color-gray-light);
+
+  margin-top: 0.5rem;
+}

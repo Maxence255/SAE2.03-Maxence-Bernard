@@ -10,6 +10,7 @@
 
 <body>
   <header id="header"></header>
+  <section id="featured-movies"></section>
 
   <section id="content"></section>
 
@@ -23,7 +24,7 @@
     import { DataMovie } from "./data/dataMovie.js";
     import { MovieCategory } from "./component/MovieCategory/script.js";
     import { DataProfile } from "./data/dataProfile.js";
-    import { Favoris } from "./component/Favoris/script.js";
+    import { Mise_en_avant } from "./component/Mise_en_avant/script.js"
 
     // Controleur
     // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -57,6 +58,7 @@
     };
 
     C.handlerDetail = async function (movieId) {
+      document.querySelector("#featured-movies").style.display = "none";
       let movieData = await DataMovies.requestMovieDetails(movieId);
       V.renderDetails(movieData);
 
@@ -94,22 +96,6 @@
 
       V.renderMoviesCategory(filteredCategories);
     };
-
-    C.loadFavorites = async function (id_profil) {
-      const response = await fetch(`./php/script.php?todo=getFavorites&id_profil=${id_profil}`);
-      const favorites = await response.json();
-
-      let html = "";
-      for (let movie of favorites) {
-        html += `
-      <div class="favorite-card">
-        <img src="../server/images/${movie.image}" alt="${movie.name}">
-        <h4>${movie.name}</h4>
-      </div>
-    `;
-      }
-      document.getElementById("favorites-container").innerHTML = html;
-    };
     C.setProfilImage = function (imageName) {
       const profileImage = document.querySelector("#profile-picture");
       const defaultImage =
@@ -122,6 +108,7 @@
 
     }
     C.handlerProfileChange = function (selectElement) {
+      document.querySelector("#featured-movies").style.display = "none";
       const selectedOption = selectElement.options[selectElement.selectedIndex];
       const newImage = selectedOption.dataset.img;
 
@@ -205,11 +192,22 @@
           alert("Ce film n'est pas dans vos favoris");
         }
       };
+      C.getFeaturedMovies = async function () {
+        let featuredMovies = await DataMovie.readFeature();
+        let content = document.querySelector("#featured-movies");
+
+        if (!featuredMovies || featuredMovies.length === 0) {
+          content.innerHTML = "<p>Aucun film mis en avant pour le moment.</p>";
+        } else {
+          content.innerHTML = Mise_en_avant.format(featuredMovies);
+        }
+      };
     C.start = async function () {
       let profiles = await DataProfile.read();
       V.renderNavBar("C.handlerAbout()", profiles);
       C.getAllMovies();
       C.setProfilImage();
+      C.getFeaturedMovies();
 
     };
 

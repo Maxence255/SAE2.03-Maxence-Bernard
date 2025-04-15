@@ -124,3 +124,16 @@ function deleteFavorisController() {
       return $result;
   }
 };
+function readFeatureController() {
+  // Appel à la fonction qui récupère les films mis en avant
+  $movies = readFeature();
+  
+  // Si aucun film n'est trouvé, on log l'erreur
+  if (!$movies) {
+      error_log("Aucun film mis en avant trouvé.");
+      return false;
+  }
+  
+  // Retourner les films mis en avant
+  return $movies;
+}

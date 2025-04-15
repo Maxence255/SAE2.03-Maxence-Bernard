@@ -53,5 +53,13 @@ DataMovies.requestMoviesCategory = async function () {
     let categories = await answer.json();
     return categories;
 };
+DataMovie.readFeature = async function () {
+  let response = await fetch(
+    `${HOST_URL}/server/script.php?todo=readFeature`);
+  let data = await response.json();
+  console.log("Réponse du serveur :", data);
+  return data;
+};
+
 export { DataMovies };
 export { DataMovie };
