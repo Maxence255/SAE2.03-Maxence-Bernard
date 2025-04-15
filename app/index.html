@@ -95,6 +95,7 @@
       });
 
       V.renderMoviesCategory(filteredCategories);
+      C.getFeaturedMovies(); // pour réafficher les films mis en avant filtrés
     };
     C.setProfilImage = function (imageName) {
       const profileImage = document.querySelector("#profile-picture");
@@ -108,7 +109,6 @@
 
     }
     C.handlerProfileChange = function (selectElement) {
-      document.querySelector("#featured-movies").style.display = "none";
       const selectedOption = selectElement.options[selectElement.selectedIndex];
       const newImage = selectedOption.dataset.img;
 
@@ -193,13 +193,49 @@
         }
       };
       C.getFeaturedMovies = async function () {
-        let featuredMovies = await DataMovie.readFeature();
-        let content = document.querySelector("#featured-movies");
+  let featuredMovies = await DataMovie.readFeature();
+  console.log("Films mis en avant récupérés :", featuredMovies);
+  let content = document.querySelector("#featured-movies");
 
-        if (!featuredMovies || featuredMovies.length === 0) {
-          content.innerHTML = "<p>Aucun film mis en avant pour le moment.</p>";
+  // Si un profil est actif, filtrer selon l'âge
+  if (C.profile) {
+    const birthDate = new Date(C.profile.date_naissance);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    // Filtrer les films selon l'âge minimum requis
+    featuredMovies = featuredMovies.filter(movie => movie.min_age <= age);
+  }
+
+  if (!featuredMovies || featuredMovies.length === 0) {
+    content.innerHTML = "<p>Aucun film mis en avant pour le moment.</p>";
+  } else {
+    content.innerHTML = Mise_en_avant.format(featuredMovies);
+  }
+};
+      C.handlerRechercher = async function () {
+        // Récupérer la valeur saisie dans la barre de recherche
+        document.querySelector("#featured-movies").style.display = "none";
+        const searchInput = document
+          .querySelector("input[name='name']")
+          .value.trim();
+
+        // Envoyer la requête au serveur avec le critère de recherche
+        let res = await DataMovie.rechercherMovies(searchInput);
+
+        // Vérifier si des résultats ont été trouvés
+        if (res && res.length > 0) {
+          let content = document.querySelector("#content");
+
+          content.innerHTML = MovieCard.format(res);
         } else {
-          content.innerHTML = Mise_en_avant.format(featuredMovies);
+          // Afficher un message clair si aucun film n'est trouvé
+          document.querySelector("#content").innerHTML =
+            "<p>Aucun film ne correspond à votre recherche.</p>";
         }
       };
     C.start = async function () {

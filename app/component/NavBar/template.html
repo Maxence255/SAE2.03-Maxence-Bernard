@@ -4,6 +4,14 @@
     <li class="navbar__item" onclick="window.location.href='index.html'">Home</li>
     <li class="navbar__item" onclick="{{onclick}}">Favoris</li>
   </ul>
+  <input
+  class="navbar__rechercher"
+  required
+  type="text"
+  name="name"
+  placeholder="Rechercher un film"
+  onkeyup="{{handlerRechercher}}"
+/>
   <div class="navbar__profile">
     <label class="navbar__label">Profil :</label>
     <select id="profile-select" class="navbar__select" onchange="{{handler}}">

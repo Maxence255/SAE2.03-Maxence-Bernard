@@ -231,10 +231,27 @@ function deleteFavoris($movieId, $profileId) {
 };
 function readFeature() {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT id, name, image, description 
+    $sql = "SELECT id, name, image, description, min_age
             FROM Movie 
             WHERE featured = TRUE";
     $stmt = $cnx->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+function rechercherMovies($query) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+
+    // On prépare la recherche dans le nom du film, le nom de la catégorie et l'année
+    $sql = "SELECT m.* 
+            FROM Movie m
+            LEFT JOIN Category c ON m.id_category = c.id
+            WHERE m.name LIKE :query 
+               OR c.name LIKE :query 
+               OR CAST(m.year AS CHAR) LIKE :query";
+
+    $query = trim($_REQUEST['query'] ?? '');
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute(['query' => "%$query%"]);
+
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
