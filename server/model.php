@@ -13,15 +13,15 @@
  * DBLOGIN : Nom d'utilisateur pour se connecter à la base de données.
  * DBPWD : Mot de passe pour se connecter à la base de données.
  */
-define("HOST", "localhost");
-define("DBNAME", "bernard196");
-define("DBLOGIN", "bernard196");
-define("DBPWD", "bernard196");
-
 // define("HOST", "localhost");
-// define("DBNAME", "SAE203");
-// define("DBLOGIN", "Adminsae203");
-// define("DBPWD", "Adminsae203");
+// define("DBNAME", "bernard196");
+// define("DBLOGIN", "bernard196");
+// define("DBPWD", "bernard196");
+
+define("HOST", "localhost");
+define("DBNAME", "SAE203");
+define("DBLOGIN", "Adminsae203");
+define("DBPWD", "Adminsae203");
 function getAllMovies(){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD); 
     // Requête SQL de mise à jour du menu avec des paramètres
