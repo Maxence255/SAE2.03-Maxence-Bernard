@@ -1,0 +1,8 @@
+Iteration 5 : 
+J'ai crée une table Profil contenant comme entité : une id (clé primaire en int) correspondant à celle du profile crée,name (varchar 255) pour le nom de chaque profile, un avatar (varchar 255 ) pour que le profile puisse rajouter une image
+Iteration 7:
+J'ai rajouter l'entité date_naissance (date) dans la table Profil pour pouvoir y comparer dans le code avec le min_age de Movie
+Iteration 9:
+J'ai crée une table Favoris qui contient son id (en clé primaire et int ) ainsi que profil_id et movie_id tout deux venue en clé étrangère (int)
+Iteration 11:
+J'ai rajouter l'entité featured (tinyint) dans Movie pour pouvoir l'afficher en tant que film mis en avant 
