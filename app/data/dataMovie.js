@@ -1,7 +1,6 @@
-import { detailsMovie } from "../component/Details/script";
 
 // URL où se trouve le répertoire "server" sur mmi.unilim.fr
-let HOST_URL = "https://mmi.unilim.fr/~bernard196/SAE2.03-Maxence-Bernard"; // CHANGE THIS TO MATCH YOUR CONFIG
+let HOST_URL = "../"; // CHANGE THIS TO MATCH YOUR CONFIG
 
 let DataMovies = {};
 let DataMovie = {};
