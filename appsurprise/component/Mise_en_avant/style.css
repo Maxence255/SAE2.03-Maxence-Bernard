@@ -1,0 +1,191 @@
+#featured-movies {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  border: none;
+  outline: none;
+}
+
+.feature-movies__principal {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  position: relative;
+  padding: 0rem 4rem;
+  width: 100%;
+  height: 100%;
+  color: var(--color-white);
+  z-index: 2;
+}
+
+.feature-movies__principal-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  background: linear-gradient(to bottom, hsla(0, 0%, 0%, 0.425) 50%, var(--bg-color) 100%), 
+              url("../../../server/images/a-silent-voice.jpg");
+  background-size: cover;
+  background-position: center;
+  border: none;
+  margin: 0;
+}
+
+.feature-movies__principal-title,
+.feature-movies__principal-description,
+.feature-movies__principal-button {
+  position: relative;
+  z-index: 2;
+}
+
+.feature-movies__principal-play {
+  max-width: 1.5rem;
+}
+
+.feature-movies__principal-title {
+  font-size: 6rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  text-shadow: 0.125rem 0.125rem 0.25rem var(--color-black);
+  color: var(--color-white);
+}
+
+.feature-movies__principal-description {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  text-shadow: 0.0625rem 0.0625rem 0.1875rem var(--color-black);
+  color: var(--color-white);
+}
+
+.feature-movies__principal-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  align-self: flex-start;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.8rem 10rem;
+  margin-bottom: 2rem;
+  color: var(--color-black);
+  background-color: var(--txt-ovr-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.feature-movies__principal-button:hover {
+  border: 0.0625rem solid var(--txt-ovr-color);
+  transform: scale(1.05);
+}
+
+.featured-movies-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Toujours 4 colonnes */
+  gap: 1rem; /* Espacement entre les cartes */
+  text-align: left;
+  overflow: auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .featured-movies-cards {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur les écrans étroits */
+    gap: 1rem; /* Maintient l'espacement entre les cartes */
+  }
+
+  .featured-movies-card {
+    width: 100%; /* Les cartes occupent toute la largeur de leur colonne */
+    aspect-ratio: 4 / 3; /* Conserve le ratio 4/3 */
+  }
+  .feature-movies__principal {
+    height: 100vh; /* Assure que le conteneur occupe toujours toute la hauteur de l'écran */
+  }
+  .feature-movies__principal-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-height: 30rem;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(to bottom, hsla(0, 0%, 0%, 0.425) 50%, var(--bg-color) 100%), 
+                url("../../../server/images/a-silent-voice.jpg");
+    background-size: cover;
+    background-position: center;
+    border: none;
+    margin: 0;
+  }
+  .feature-movies__principal-button {
+    display: none;
+  }
+  .feature-movies__principal-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+    text-shadow: 0.125rem 0.125rem 0.25rem var(--color-black);
+    color: var(--color-white);
+  }
+}
+
+.featured-movies-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  width: 20vw;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
+}
+
+.featured-movie-img-parent {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.featured-movies__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.featured-movies-card:hover .featured-movies__img {
+  transform: scale(1.1);
+  filter: brightness(0.7);
+}
+
+.featured-movies__description {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 1.2rem;
+  text-align: left;
+  color: var(--color-white);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+}
+
+.featured-movies-card:hover .featured-movies__description {
+  opacity: 1;
+}
+
+.featured-movies__titre {
+  margin-top: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: left;
+  color: var(--color-fg);
+  width: 100%;
+}

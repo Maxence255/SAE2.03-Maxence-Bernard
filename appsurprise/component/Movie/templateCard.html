@@ -1,0 +1,38 @@
+<div class="movie__card">
+  <div class="movie__card-parent">
+    <img class="movie__img" src="../server/images/{{image}}" alt="Image" onclick="{{onclick}}">
+  </div>
+  <div class="movie__card-name">
+    <h3 class="movie__title">{{name}}</h3>
+  </div>
+  <div class="movie__card-info">
+    <p class="movie__description">Un description d'exemple</p>
+    
+<div class="movie__svg">
+  <p class="movie__meta">8 épisodes • Genre Exemple</p>
+  <div>
+    <!-- Bouton Favoris -->
+    <a id="card-favoris-{{id}}" class="card__favoris" type="button" onclick="{{handlerFavoris}};">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.8 4.6c-1.5-1.5-4-1.5-5.5 0L12 7.9l-3.3-3.3c-1.5-1.5-4-1.5-5.5 0s-1.5 4 0 5.5l8.8 8.8 8.8-8.8c1.5-1.5 1.5-4 0-5.5z"></path>
+      </svg>
+      
+    </a>
+    
+    <!-- Bouton Supprimer Favoris -->
+    <a
+    id="card-delete-{{id}}"
+    class="card__deletefavoris hidden"
+    type="button"
+    onclick="{{handlerDelete}};"
+  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.8 4.6c-1.5-1.5-4-1.5-5.5 0L12 7.9l-3.3-3.3c-1.5-1.5-4-1.5-5.5 0s-1.5 4 0 5.5l8.8 8.8 8.8-8.8c1.5-1.5 1.5-4 0-5.5z"></path>
+    <line x1="4" y1="20" x2="20" y2="4"></line>
+  </svg>
+  
+</a>
+</div>
+  </div>
+  </div>
+</div>

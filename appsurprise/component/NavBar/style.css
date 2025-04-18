@@ -1,0 +1,215 @@
+/* Barre de navigation */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rem 3rem;
+
+  color: var(--txt-color);
+  background-color: var(--bg-color);
+  font-size: 1.25rem;
+  height: 4rem;
+}
+.navbar__logo{
+  max-width: 1.8rem;
+}
+.navbar__home{
+  display: flex;
+  align-items: center;
+  gap :0rem 2rem;
+}
+.navbar__home:hover {
+  color: var(--txt-ovr-color);
+  background-color: var( --txt-bg-ovr-color);
+}
+/* Liste des liens */
+.navbar__list {
+  display: flex; /* Active le mode flexbox */
+  justify-content: center; /* Centre les éléments horizontalement */
+  align-items: center; /* Aligne les éléments verticalement */
+  gap: 0rem 2rem; /* Espacement entre les éléments */
+
+  list-style: none; /* Supprime les puces */
+  margin: 0; /* Supprime les marges */
+  padding: 0; /* Supprime les espacements internes */
+}
+/* Liens de navigation */
+.navbar__item {
+  display: inline-block;
+  padding: 1rem 1rem;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-fg);
+  cursor: pointer;
+  height: 100%;
+}
+.navbar__home-2{
+  display: inline-block;
+  padding: 1rem 1rem;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-fg);
+  cursor: pointer;
+  height: 100%;
+}
+.navbar__item:hover {
+  color: var(--txt-ovr-color);
+  background-color: var( --txt-bg-ovr-color);
+}
+
+/* Section profil */
+.navbar__profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  position: relative;
+}
+
+/* Label du profil */
+.navbar__label {
+  display: inline-block;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-fg);
+}
+
+/* Sélecteur de profil */
+.navbar__select {
+  display: inline-block;
+
+  padding: 0.5rem 1rem;
+
+  border-radius: 0.5rem;
+
+  font-size: 1rem;
+  font-family: var(--ff-sans);
+  color: var(--txt-color);
+  background-color: transparent;
+
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.navbar__utilities{
+  display: flex;
+}
+.navbar__search{
+  display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.navbar__search:hover {
+  color: var(--txt-ovr-color);
+  background-color: var( --txt-bg-ovr-color);
+}
+.navbar__svg path {
+  fill: var(--txt-color);
+}
+.navbar__rechercher{
+  background-color: transparent;
+  border: none;
+}
+.navbar__select:focus {
+  border-color: transparent;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background-color: var(--bg-color);
+}
+.navbar__right{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap : 0rem 2rem;
+}
+/* Image du profil */
+.navbar__picture {
+  display: inline-block;
+
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+
+  border: 2px solid var(--color-gray-light);
+  background-color: var(--color-gray-light);
+
+  transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.navbar__picture:hover {
+  border-color: var(--color-button-hover);
+  transform: scale(1.1);
+}
+.navbar__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+
+.navbar__burger span {
+  display: block;
+  height: 0.25rem;
+  width: 100%;
+  background-color: var(--color-fg);
+  border-radius: 0.125rem;
+  transition: all 0.3s ease;
+}
+
+/* Mode mobile */
+@media (max-width: 768px) {
+  .navbar__list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-bg);
+    padding: 1rem 0;
+    gap: 1rem;
+    z-index: 10;
+  }
+
+  .navbar__burger {
+    display: flex;
+  }
+
+  .navbar__list.navbar__list--active {
+    display: flex;
+  }
+}
+@media (max-width: 768px) {
+  .navbar__list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-bg);
+    padding: 1rem 0;
+    gap: 1rem;
+    z-index: 10;
+  }
+
+  .navbar__burger {
+    display: flex;
+  }
+
+  .navbar__list.navbar__list--active {
+    display: flex;
+  }
+  .navbar__logo {
+    .navbar__logo {
+      display: block; /* Assure que le logo reste visible */
+      max-width: 1.5rem; /* Ajuste la taille du logo pour les écrans étroits */
+    }
+  }
+  .navbar__utilities{
+    display: none;
+  }
+}

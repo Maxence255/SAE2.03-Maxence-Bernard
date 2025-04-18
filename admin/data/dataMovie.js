@@ -71,6 +71,25 @@ DataMovie.delete = async function (fdata) {
     return data;
 }
 
+DataMovie.rechercherMovies = async function (searchQuery) {
+  let response = await fetch(
+    `${HOST_URL}/server/script.php?todo=rechercherMovies&query=${encodeURIComponent(
+      searchQuery
+    )}`
+  );
+
+  console.log("Réponse brute du serveur :", response);
+
+  if (!response.ok) {
+    console.error("Erreur HTTP :", response.status);
+    return [];
+  }
+
+  let data = await response.json();
+  console.log("Données JSON :", data);
+  return data;
+};
+
 export {DataMovie};
 
 

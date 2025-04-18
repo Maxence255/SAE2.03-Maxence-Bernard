@@ -1,0 +1,124 @@
+.movie__cards {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--ff-sans);
+}
+.movie__card{
+  display: flex;
+  flex-direction: column;
+  width: 30rem;
+  height: 25rem;
+  box-sizing: border-box;
+  transform-origin: center center;
+  overflow: hidden;
+}
+.movie__card-parent {
+  width: 100%;
+  height: 100%; /* ou 200px, ou aspect-ratio */
+  overflow: hidden;
+  position: relative;
+}
+.movie__img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.movie__card-name{
+  padding-left: 1rem;
+}
+.movie_title{
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-white);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+}
+.movie__card-info {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  z-index: 6;
+  margin-bottom: 1rem;
+
+}
+.movie__card:hover .movie__card-info{
+  
+  transition: all 0.3s ease;
+  opacity: 1;
+  background-color: var(--color-gray-dark);
+ 
+}
+.movie__card:hover .movie__card-name{
+  
+  transition: all 0.3s ease;
+  opacity: 1;
+  background-color: var(--color-gray-dark);
+ 
+}
+.movie__card:hover {
+  transform: scale(1.1, 1.1);
+  transition: all 0.3s ease;
+  z-index: 6;
+}
+.movie__svg{
+  display: flex;
+  justify-content:space-between; /* Aligne à gauche */
+  align-items: flex-end; /* Aligne en bas */
+  background: none;
+  color: none;
+}
+.card__deletefavoris svg path {
+fill :red;
+}
+.carousel-container {
+  position: relative;
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 2rem;
+}
+
+.movie__card {
+  flex: 0 0 calc(25% - 1.5rem); /* 4 cartes visibles avec gap */
+  transition: transform 0.3s ease;
+}
+
+/* Boutons flèches */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 50%;
+}
+
+.carousel-btn.prev {
+  left: 0.5rem;
+}
+
+.carousel-btn.next {
+  right: 0.5rem;
+}
+/* Affiche les flèches au hover de l'ensemble */
+.movie__cards:hover .carousel-btn,
+.movie__cards:hover {
+  opacity: 1;
+  pointer-events: auto;
+}

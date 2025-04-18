@@ -1,0 +1,24 @@
+<div class="movie__details">
+    <div class="movie__details-header">
+        <img class="movie__details-img" src="../server/images/{{image}}" alt="Image du film">
+        <div class="movie__details-info">
+            <div class="movie__details-name">
+            <h3 class="movie__details-title">{{name}}</h3></div>
+            <div class="movie__detail-desc">
+            <p class="movie__details-description">{{description}}</p></div>
+            <div class="movie__details-buttons">
+                <button class="movie__details-play">¨lay</button>
+                <button class="movie__details-fav">Mylist</button>
+                
+            </div>
+            <p class="movie__details-release"><strong>Date de sortie :</strong> {{release}}</p>
+            <p class="movie__details-duration"><strong>Durée :</strong> {{duration}}</p>
+            <p class="movie__details-rating"><strong>Réalisateur :</strong> {{director}}</p>
+            <p class="movie__details-genre"><strong>Catégorie :</strong> {{categorie}}</p>
+            <p class="movie__details-age"><strong>Âge minimum :</strong> {{age}}</p>
+        </div>
+    </div>
+    <div class="movie__details-trailer-container">
+        <iframe class="movie__details-trailer" src="{{trailer}}" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
