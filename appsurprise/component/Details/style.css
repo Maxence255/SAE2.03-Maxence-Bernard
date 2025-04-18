@@ -20,26 +20,12 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
-  position: relative;
-  width: 90%;
-  margin: 2rem auto;
-
-  box-sizing: border-box;
-  padding: 2rem;
-
-  font-size: 1.2rem;
-  color: var(--color-fg);
-
-  background-color: rgba(0, 0, 0, 0.85);
-  border-radius: 1rem;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
 }
 
 /* En-tête du film */
 .movie__details-header {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 2rem;
 
   position: relative;
@@ -50,27 +36,23 @@ body {
 .movie__details-img {
   display: block;
 
-  position: relative;
+  position: absolute;
   width: 100%;
-  max-width: 15rem;
+  max-width: 100%;
+  max-height: 60rem;
   border-radius: 0.5rem;
-
+  object-fit: cover;
   box-sizing: border-box;
   background-color: var(--color-gray-light);
+  opacity: 0.5;
 
   transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: -1;
 }
 
-.movie__details-img:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
 
-/* Informations du film */
 .movie__details-info {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
 
   position: relative;
   gap: 1rem;
@@ -78,18 +60,56 @@ body {
   font-size: 1rem;
   color: var(--color-gray-light);
 }
-
+.movie__details-buttons{
+  display: flex;
+  gap: 2rem;
+}
+.movie__details-play{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  align-self: flex-start;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.8rem 6rem;
+  margin-bottom: 2rem;
+  color: var(--color-black);
+  background-color: var(--txt-ovr-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.movie__details-fav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  align-self: flex-start;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.8rem 6rem;
+  margin-bottom: 2rem;
+  color: var(--color-white);
+  background-color: var(--bg-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 .movie__details-title {
-  font-size: 2rem;
+  font-size: 5rem;
   font-weight: 700;
   color: var(--color-fg);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  margin-top: 15rem;
 }
 
 .movie__details-description {
   font-size: 1.2rem;
   font-weight: 400;
+  max-width: 40rem;
   color: var(--color-gray-light);
+  z-index: 1000;
 }
 
 .movie__details-release,

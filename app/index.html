@@ -34,6 +34,7 @@
     C.profil = null;
 
     C.addToFavorites = function (id) {
+      
       // Récupère les favoris existants depuis le localStorage (ou crée une liste vide)
       let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
@@ -120,6 +121,7 @@
     };
     C.handlerFavorisList = async function () {
         // Récupérer l'ID du profil actif
+        document.querySelector("#featured-movies").style.display = "none";
         const profileSelect = document.querySelector("#profile-select");
         const profileId = profileSelect ? profileSelect.value : null;
 

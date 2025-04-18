@@ -112,14 +112,15 @@
       const selectedOption = selectElement.options[selectElement.selectedIndex];
       const newImage = selectedOption.dataset.img;
 
-      // Met à jour l'image
+      
       C.setProfilImage(newImage);
 
-      // Recharge les films en filtrant selon le profil sélectionné
+ 
       C.handlerProfile();
     };
     C.handlerFavorisList = async function () {
-        // Récupérer l'ID du profil actif
+     
+        document.querySelector("#featured-movies").style.display = "none";
         const profileSelect = document.querySelector("#profile-select");
         const profileId = profileSelect ? profileSelect.value : null;
 
@@ -128,14 +129,14 @@
           return;
         }
 
-        // Récupérer les films favoris pour le profil actif
+
         let favoris = await DataMovie.getFavoris(profileId);
 
         if (!favoris || favoris.length === 0) {
           document.querySelector("#content").innerHTML =
             "<p>Aucun film ajouté aux favoris.</p>";
         } else {
-          // Afficher les films favoris
+
           V.renderMovie(favoris);
         }
       };

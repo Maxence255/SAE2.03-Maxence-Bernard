@@ -28,6 +28,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  cursor: pointer;
 }
 .movie__card-name{
   padding-left: 1rem;

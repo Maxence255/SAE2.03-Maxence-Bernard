@@ -1,6 +1,6 @@
 
 // URL où se trouve le répertoire "server" sur mmi.unilim.fr
-let HOST_URL = "..";//"http://mmi.unilim.fr/~????"; // CHANGE THIS TO MATCH YOUR CONFIG
+let HOST_URL = "../";//"http://mmi.unilim.fr/~????"; // CHANGE THIS TO MATCH YOUR CONFIG
 
 let DataMovie = {};
 

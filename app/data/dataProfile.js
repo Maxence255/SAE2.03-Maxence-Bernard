@@ -2,11 +2,7 @@ let HOST_URL = "../";
 
 let DataProfile = {};
 
-// DataProfile.read = async function () {
-//   let answer = await fetch(HOST_URL + "/server/script.php?todo=readProfile");
-//   let profile = await answer.json();
-//   return profile;
-// };
+
 
 DataProfile.read = async function () {
     let answer = await fetch(HOST_URL + "/server/script.php?todo=readProfile");
